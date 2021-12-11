@@ -16,9 +16,9 @@ namespace Bussiness
         {
             producAccess = productAcessible;
         }
-        public AllProductResult GetAllProducts(string keyword, int index, int pagesize)
+        public AllProductResult GetAllProducts(string keyword)
         {
-            return producAccess.GetAllProducts(keyword, index, pagesize);
+            return producAccess.GetAllProducts(keyword);
         }
 
         public List<LatestResult> GetLatests(int quantity)
@@ -33,12 +33,12 @@ namespace Bussiness
 
         public List<SaleResult> GetSales(int quantity)
         {
-            return GetSales(quantity);
+            return producAccess.GetSales(quantity);
         }
 
         public List<TrendingResult> GetTrendings(int quantity, string category_id)
         {
-            return GetTrendings(quantity, category_id);
+            return producAccess.GetTrendings(quantity, category_id);
         }
     }
 }

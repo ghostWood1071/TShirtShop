@@ -14,7 +14,6 @@ namespace Models
     public class AllProduct
     {
 		string cate_id;
-		public Int64 rownumber { get; set; }
 		public Guid category_id { get; set; }
 		public string category_name { get { return cate_id; } set { cate_id = value.ToString(); } }
 		public string product_id { get; set; }

@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="all-category cate-label" ng-app ="myapp" >
+	<h3 class="cat-heading "><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
+		<ul class="main-category cate-content" ng-controller="category">
+			<li ng-repeat="c in categories"><a href="{{c.category_id}}">{{c.category_name}}</a></li>
+		</ul>
+</div>
+
+

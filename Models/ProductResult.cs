@@ -15,6 +15,6 @@ namespace Models
         public double discount { get; set; }
         public int quantity { get; set; }
         public int isnew { get; set; }
-        internal List<string> img { get; set; }
+        public string img { get; set; }
     }
 }

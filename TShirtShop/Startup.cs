@@ -31,6 +31,8 @@ namespace TShirtShop
             services.AddTransient<IDataHelper>(x => new DataHelper(Configuration.GetConnectionString("MVC")));
             services.AddTransient<IProductAcessible, ProductDataAcess>();
             services.AddTransient<IProductBuss, ProductBussiness>();
+            services.AddTransient<ICategoryAcessible, CategoryDataAcess>();
+            services.AddTransient<ICategoryBuss, CategoryBussiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

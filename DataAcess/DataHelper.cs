@@ -90,7 +90,7 @@ namespace DataAcess
                 command.Parameters.AddRange(parameters);
                 command.CommandText = procName;
                 SqlDataReader reader = command.ExecuteReader();
-
+                
                 int length = parameters.Length-1;
                 if ((int?)(parameters[length - 2].Value) > 0)
                     throw new Exception($"{parameters[length - 3].Value} in line {parameters[length].Value}");
@@ -108,11 +108,11 @@ namespace DataAcess
                     }
                     result.Add((T)newItem);
                 }
-                
                 return result;
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
         }
