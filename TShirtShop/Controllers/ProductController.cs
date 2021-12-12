@@ -23,6 +23,11 @@ namespace TShirtShop.Controllers
             return View();
         }
 
+        public IActionResult ProductDetail()
+        {
+            return View();
+        }
+
         //ultilities
         public IEnumerable<TrendingResult> GetTrendings(int quantity, string category_id)
         {
@@ -52,6 +57,11 @@ namespace TShirtShop.Controllers
         public List<CategoryResult> GetCategories()
         {
             return categoryBuss.GetCategories();
+        }
+
+        public List<ProductImage> GetProductImages(string product_id)
+        {
+            return productBuss.GetProductImages(product_id);
         }
 
     }

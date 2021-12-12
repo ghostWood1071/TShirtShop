@@ -1,6 +1,6 @@
 ﻿
 
-myApp.controller('product', ($scope, $http, $log) => {
+myApp.controller('product', ($scope, $http) => {
 
     //get categories
     $http.get(`/product/GetCategories`).then((response) => {
@@ -81,7 +81,6 @@ myApp.controller('product', ($scope, $http, $log) => {
             $scope.reverse = false;
         else $scope.reverse = true;
     }
-
     $scope.setSortCol = (value) => $scope.sortColumn = value;
 
     //pagination
@@ -108,7 +107,6 @@ myApp.controller('product', ($scope, $http, $log) => {
         if (end > $scope.products.length - 1)
             end = $scope.products.length - 1;
         $scope.product_paged = $scope.products.slice(start, end + 1);
-        console.log($scope.product_paged);
     }
 
     $scope.loadLabelName = (item) => {

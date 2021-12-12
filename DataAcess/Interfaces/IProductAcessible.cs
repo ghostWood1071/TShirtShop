@@ -12,6 +12,8 @@ namespace DataAcess.Interfaces
         List<TrendingResult> GetTrendings(int quantity, string category_id);
         List<LatestResult> GetLatests(int quantity);
         AllProductResult GetAllProducts(string keyword);
-        ProductDetailResult GetProductDetail(string product_id); 
+        ProductDetailResult GetProductDetail(string product_id);
+
+        List<ProductImage> GetProductImages(string product_id);
     }
 }

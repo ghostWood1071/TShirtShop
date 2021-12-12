@@ -40,5 +40,10 @@ namespace Bussiness
         {
             return producAccess.GetTrendings(quantity, category_id);
         }
+
+        public List<ProductImage> GetProductImages(string product_id)
+        {
+            return producAccess.GetProductImages(product_id);
+        }
     }
 }

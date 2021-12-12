@@ -1,0 +1,115 @@
+﻿<!--Section: Block Content-->
+@section style{
+    <style>
+        .select-border{
+            border-width : 5px !important;
+        }
+    </style>
+}
+<section class="mb-5" style="margin: auto; width: 90%; margin-top: 50px" ng-controller="product_detail">
+
+  <div class="row">
+    <div class="col-md-6 mb-4 mb-md-0">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+      <div class="carousel-inner">
+        <div ng-repeat="i in images" class="carousel-item {{setFirstImage($index)}}">
+          <img class="d-block w-100" src="i.image_url">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+    </div>
+
+    <div class="col-md-6" style="padding-top:12px">
+      <h5>{{product.product_name}}</h5>
+      <p class="mb-2 text-muted text-uppercase small">{{product.product_id}}</p>
+      <p><span class="mr-1"><strong>{{product.price_value}} VND</strong></span></p>
+      <div class="table-responsive">
+        <table class="table table-sm table-borderless mb-0">
+          <tbody>
+            <tr>
+              <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
+              <td>{{product.product_id}}</td>
+            </tr>
+            <tr>
+              <th class="pl-0 w-25" scope="row"><strong>In stock</strong></th>
+              <td>{{size.quantity}}</td>
+            </tr>
+            <tr>
+              <th class="pl-0 w-25" scope="row"><strong>Discount</strong></th>
+              <td>{{color.discount}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <hr>
+      <div class="d-flex flex-row color-selector" style="margin-bottom: 20px">
+          <div>colors:</div>
+          <div class="d-flex flex-row">
+              <div ng-repeat="c in colors" ng-click="selectColor($index)" class="rounded-circle color {{getFirstColor($index)}}" 
+                   style="width: 30px; 
+                          height: 30px; 
+                          background-color: {{c.color_value}}; 
+                          margin-left: 10px; 
+                          margin-right: 10px; 
+                          border: solid 1px black;">         
+              </div>
+          </div>
+      </div>
+     
+      <div class="d-flex flex-row size-selector" style="margin-bottom: 20px">
+          <div style="padding-top:10px">Size:</div>
+          <div class="d-flex flex-row">
+              <div ng-repeat="c in sizes" ng-click="setSize($index)" class="size {{getFirstColor($index)}}" 
+                   style="width: fit-content; 
+                          height: fit-content; 
+                          background-color: white; 
+                          margin-left: 10px; 
+                          margin-right: 10px; 
+                          border: solid 1px black;
+                          text-align:center;
+                          padding: 5px 10px 5px 10px">
+                      {{c.size_value}}
+              </div>
+          </div>
+      </div>
+      <div class="d-flex flex-row" style="margin-bottom: 20px">
+          <div style="margin-right: 10px; padding-top:5px">Amount:</div>
+          <div><input type="number" ng-model="quantity" ng-change="setQuantity()"/></div>
+      </div>
+      <div class="d-flex flex-row" style="margin-bottom: 20px; font-size:20px">
+          <div style="margin-right:10px"><strong>Total:</strong></div>
+          <div><strong ng-model="total" >{{quantity*product.price_value*(1-color.discount/100)}} VND</strong></div>
+      </div>
+      
+      <button type="button" class="btn btn-primary btn-md mr-1 mb-2" ng-click="buyNow()">Buy now</button>
+      <button type="button" class="btn btn-light btn-md mr-1 mb-2" ng-click="addCart()"><i
+          class="ti-bag pr-2"></i>Add to cart</button>
+    </div>
+  </div>
+</section>
+@section script{
+    <script>
+        var removeSelect = (selector)=> {
+            $(selector).removeClass('border border-primary select-border');
+        }
+        $(document).on('click', '.color', (e)=>{
+            removeSelect(".color");
+            $(e.target).addClass('border border-primary select-border');
+        });
+
+        $(document).on('click', '.size', (e)=>{
+            removeSelect(".size");
+            $(e.target).addClass('border border-primary select-border');
+        });
+    </script>
+    <script src="~/js/product.detail.module.js"></script>
+}
+<!--Section: Block Content-->

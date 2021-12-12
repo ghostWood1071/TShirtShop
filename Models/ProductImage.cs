@@ -8,5 +8,6 @@ namespace Models
 {
     public class ProductImage
     {
+        public string image_url { get; set; }
     }
 }

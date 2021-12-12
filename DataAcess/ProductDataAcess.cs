@@ -93,5 +93,20 @@ namespace DataAcess
             helper.Close();
             return latests;
         }
+
+        public List<ProductImage> GetProductImages(string product_id)
+        {
+            helper.Open();
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                helper.CreateParameter("@product_id", product_id, DbType.String),
+                helper.CreateParameter("@out_msg", "", DbType.String, ParameterDirection.Output),
+                helper.CreateParameter("@out_err_code", 0, DbType.Int32, ParameterDirection.Output),
+                helper.CreateParameter("@out_err_line", -1, DbType.Int32, ParameterDirection.Output)
+            };
+            List<ProductImage> imgs = helper.GetDatas<ProductImage>("get_product_img", sqlParameters);
+            helper.Close();
+            return imgs;
+        }
     }
 }

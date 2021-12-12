@@ -13,5 +13,7 @@ namespace Bussiness.Interfaces
         List<LatestResult> GetLatests(int quantity);
         AllProductResult GetAllProducts(string keyword);
         ProductDetailResult GetProductDetail(string product_id);
+
+        List<ProductImage> GetProductImages(string product_id);
     }
 }
