@@ -86,7 +86,7 @@
       </div>
       <div class="d-flex flex-row" style="margin-bottom: 20px; font-size:20px">
           <div style="margin-right:10px"><strong>Total:</strong></div>
-          <div><strong ng-model="total" >{{quantity*product.price_value*(1-color.discount/100)}} VND</strong></div>
+          <div><strong ng-model="total" ng-change="setTotal()">{{quantity*product.price_value*(1-color.discount/100)}} VND</strong></div>
       </div>
       
       <button type="button" class="btn btn-primary btn-md mr-1 mb-2" ng-click="buyNow()">Buy now</button>

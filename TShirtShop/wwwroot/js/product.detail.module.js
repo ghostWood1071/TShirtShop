@@ -1,4 +1,4 @@
-﻿myApp.controller('product_detail', ($scope, $http) => {
+﻿myApp.controller('product_detail', ($scope, $http, $rootScope) => {
 
     $scope.quantity = 0;
     $scope.total = 0;
@@ -55,6 +55,7 @@
             $scope.quantity = 0;
         if ($scope.quantity > $scope.size.quantity)
             $scope.quantity = $scope.size.quantity;
+        $scope.total = $scope.quantity * $scope.product.price_value * (1 - $scope.color.discount/100);
     }
 
     $scope.setFirstImage = (index) => {
@@ -63,13 +64,38 @@
         return "";
     }
 
+    $scope.setTotal = () => {
+        console.log("hello");
+    }
+
     //order bussiness
     $scope.addCart = () => {
-
+        if ($scope.quantity <= 0)
+            return;
+        var cartItem = {
+            product_name: $scope.product.product_name,
+            color_name: $scope.color.color_name,
+            quantity: $scope.quantity,
+            size_id: $scope.size.size_id,
+            size_name: $scope.size.size_value,
+            img: "", //$scope.images[0].image_url,
+            total: $scope.total
+        }
+        var cart = getLocalData("cart");
+        var itemIndex = cart.findIndex(x => x.size_id == $scope.size.size_id);
+        if (itemIndex < 0)
+            cart.push(cartItem);
+        else {
+            if (cart[itemIndex].quantity < $scope.size.quantity)
+                cart[itemIndex].quantity += 1;
+        }
+        saveToLocal("cart", cart);
+        $rootScope.cart = getLocalData("cart");
     }
 
     $scope.buyNow = () => {
-
+        $scope.addCart();
+        window.location.href = "/checkout";
     }
     
 });

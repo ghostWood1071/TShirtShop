@@ -11,3 +11,17 @@ function getParameter(parameterName) {
         });
     return result;
 }
+
+function getLocalData(item) {
+    var raw = localStorage.getItem(item);
+    if (raw == null)
+        localStorage.setItem(item, "[]");
+    var data = JSON.parse(localStorage.getItem(item));
+    return data;
+}
+
+function saveToLocal(item, data) {
+    var value = JSON.stringify(data);
+    console.log(value);
+    localStorage.setItem(item, value);
+}

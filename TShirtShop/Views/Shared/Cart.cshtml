@@ -1,0 +1,27 @@
+﻿<div class="sinlge-bar shopping" ng-controller="cart">
+   <a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{cart.length}}</span></a>
+   <!-- cart -->
+   <div class="shopping-item">
+      <div class="dropdown-cart-header">
+         <span>{{cart.length}}</span>
+         <a href="#">View Cart</a>
+      </div>
+      <ul class="shopping-list">
+         <li ng-repeat="c in cart">
+            <a ng-click="remove($index)" href="javascript:void(0)" class="remove" title="Remove this item"><i class="fa fa-remove"></i></a>
+            <a class="cart-img" href="#"><img src="{{c.img}}" alt="#"></a>
+            <h4><a href="#">{{c.product_name}}-{{c.color_name}}</a></h4>
+            <p class="quantity">{{c.quantity}}x - <span class="amount">{{c.total}} VND</span></p>
+         </li>
+         
+      </ul>
+      <div class="bottom">
+         <div class="total">
+            <span>Total</span>
+            <span class="total-amount">{{total()}}</span>
+         </div>
+         <a href="checkout.html" class="btn animate">Checkout</a>
+      </div>
+   </div>
+   <!--/ End Shopping Item -->
+</div>
