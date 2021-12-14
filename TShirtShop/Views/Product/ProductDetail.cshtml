@@ -5,9 +5,9 @@
             border-width : 5px !important;
         }
     </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" media="all">
 }
 <section class="mb-5" style="margin: auto; width: 90%; margin-top: 50px" ng-controller="product_detail">
-
   <div class="row">
     <div class="col-md-6 mb-4 mb-md-0">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -35,7 +35,7 @@
         <table class="table table-sm table-borderless mb-0">
           <tbody>
             <tr>
-              <th class="pl-0 w-25" scope="row"><strong>Model</strong></th>
+              <th class="pl-0 w-25" scope="row"><strong>Model {{modalState}}</strong></th>
               <td>{{product.product_id}}</td>
             </tr>
             <tr>
@@ -95,7 +95,9 @@
     </div>
   </div>
 </section>
+
 @section script{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script>
         var removeSelect = (selector)=> {
             $(selector).removeClass('border border-primary select-border');

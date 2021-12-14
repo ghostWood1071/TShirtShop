@@ -25,3 +25,13 @@ function saveToLocal(item, data) {
     console.log(value);
     localStorage.setItem(item, value);
 }
+
+function authenticate(context) {
+    return new Promise((resolve, reject) => {
+        context.get("/login/authenticate").then((res) => {
+            resolve(res.data);
+        }, (err) => {
+            reject(err.data);
+        })
+    });
+}

@@ -28,11 +28,20 @@ namespace TShirtShop
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDistributedMemoryCache();           
+            services.AddSession(cfg => {                    
+                cfg.Cookie.Name = "ecomerce";             
+                cfg.IdleTimeout = new TimeSpan(365, 0, 0, 0); 
+            });
+
             services.AddTransient<IDataHelper>(x => new DataHelper(Configuration.GetConnectionString("MVC")));
             services.AddTransient<IProductAcessible, ProductDataAcess>();
             services.AddTransient<IProductBuss, ProductBussiness>();
             services.AddTransient<ICategoryAcessible, CategoryDataAcess>();
             services.AddTransient<ICategoryBuss, CategoryBussiness>();
+            services.AddTransient<IAccountAcessible, UserDataAcess>();
+            services.AddTransient<IUserBussiness, UserBussiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +63,8 @@ namespace TShirtShop
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

@@ -93,9 +93,15 @@
         $rootScope.cart = getLocalData("cart");
     }
 
-    $scope.buyNow = () => {
-        $scope.addCart();
-        window.location.href = "/checkout";
+    $scope.buyNow = async () => {
+        var checkLogin = await authenticate($http);
+        if (checkLogin) {
+            $scope.addCart();
+            //location.href = "/checkout";
+        }
+        else {
+            toastr.error("You need login in order to buy product");
+        }
     }
     
 });

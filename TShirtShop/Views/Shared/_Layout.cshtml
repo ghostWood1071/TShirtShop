@@ -54,18 +54,6 @@
 </head>
 <body class="js" ng-app="myapp">
 	
-	<!-- Preloader -->
-	<div class="preloader">
-		<div class="preloader-inner">
-			<div class="preloader-icon">
-				<span></span>
-				<span></span>
-			</div>
-		</div>
-	</div>
-	<!-- End Preloader -->
-	
-	
 	<!-- Header -->
 	<header class="header shop">
 		
@@ -93,7 +81,7 @@
 						<!--/ End Search Form -->
 						<div class="mobile-nav"></div>
 					</div>
-					<div class="col-lg-8 col-md-7 col-12">
+					<div class="col-lg-7 col-md-6 col-12">
 						<div class="search-bar-top">
 							<div class="search-bar">
 								<form>
@@ -103,12 +91,10 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-2 col-md-3 col-12">
-						<div class="right-bar">
+					<div class="col-lg-3 col-md-4 col-12">
+						<div class="right-bar" style="display: flex">
 							<!-- Search Form -->
-							<div class="sinlge-bar">
-								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
-							</div>
+							@await Html.PartialAsync("Account")
 							@await Html.PartialAsync("Cart")
 						</div>
 					</div>
@@ -286,6 +272,7 @@
 	<script src="~/js/module.js"></script>
 	<script src="~/js/category.module.js"></script>
 	<script src="~/js/cart.module.js"></script>
+	<script src="~/js/account.module.js"></script>
 	@RenderSection("script", required: false)
 </body>
 </html>
