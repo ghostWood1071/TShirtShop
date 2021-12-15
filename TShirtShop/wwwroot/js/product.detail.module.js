@@ -79,7 +79,9 @@
             size_id: $scope.size.size_id,
             size_name: $scope.size.size_value,
             img: "", //$scope.images[0].image_url,
-            total: $scope.total
+            total: $scope.quantity * ($scope.product.price_value * (1 - $scope.color.discount / 100)),
+            in_stock: $scope.size.quantity,
+            unit_price: $scope.product.price_value * (1-$scope.color.discount/100)
         }
         var cart = getLocalData("cart");
         var itemIndex = cart.findIndex(x => x.size_id == $scope.size.size_id);

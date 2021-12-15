@@ -1,0 +1,82 @@
+﻿<!-- Shopping Cart -->
+<div class="shopping-cart section" ng-controller = "cart">
+   <div class="container">
+      <div class="row">
+         <div class="col-12">
+            <!-- Shopping Summery -->
+            <table class="table shopping-summery">
+               <thead>
+                  <tr class="main-hading">
+                     <th>PRODUCT</th>
+                     <th>NAME</th>
+                     <th class="text-center">UNIT PRICE</th>
+                     <th class="text-center">QUANTITY</th>
+                     <th class="text-center">TOTAL</th>
+                     <th class="text-center"><i class="ti-trash remove-icon"></i></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr ng-repeat="c in cart">
+                     <td class="image" data-title="No"><img src="{{c.img}}"></td>
+                     <td class="product-des" data-title="Description">
+                        <p class="product-name"><a href="#">{{c.product_name}}</a></p>
+                        <p class="product-des">color: {{c.color_name}} - size: {{c.size_name}}</p>
+                     </td>
+                     <td class="price" data-title="Price"><span>{{c.unit_price}}</span></td>
+                     <td class="qty" data-title="Qty">
+                        <!-- Input Order -->
+                        <div class="input-group">
+                           <div class="button minus" ng-click="minus($index)">
+                              <button type="button" class="btn btn-primary btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                              <i class="ti-minus"></i>
+                              </button>
+                           </div>
+                           <input type="text" name="quant[1]" class="input-number"  data-min="1" data-max="100" value="{{c.quantity}}">
+                           <div class="button plus" ng-click="plus($index)">
+                              <button type="button" class="btn btn-primary btn-number" data-type="plus" data-field="quant[1]">
+                              <i class="ti-plus"></i>
+                              </button>
+                           </div>
+                        </div>
+                        <!--/ End Input Order -->
+                     </td>
+                     <td class="total-amount" data-title="Total"><span>{{c.total}}</span></td>
+                     <td class="action" data-title="Remove" ng-click="remove()"><a href="javascript:void(0)"><i class="ti-trash remove-icon"></i></a></td>
+                  </tr>
+               </tbody>
+            </table>
+            <!--/ End Shopping Summery -->
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-12">
+            <!-- Total Amount -->
+            <div class="total-amount">
+               <div class="row">
+                  <div class="col-lg-8 col-md-5 col-12">
+                     
+                  </div>
+                  <div class="col-lg-4 col-md-7 col-12">
+                     <div class="right">
+                        <ul>
+                           <li>Cart Subtotal<span>{{total()}} VND</span></li>
+                           <li>Address<span>{{accInfo.address}}</span></li>
+                           <li class="last">You Pay<span>{{total()}} VND</span></li>
+                        </ul>
+                        <div class="button5">
+                           <a href="#" class="btn">Checkout</a>
+                           <a href="#" class="btn">Continue shopping</a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!--/ End Total Amount -->
+         </div>
+      </div>
+   </div>
+</div>
+<!--/ End Shopping Cart -->
+@section script {
+    <script src="~/js/cart.module.js"></script>
+}
