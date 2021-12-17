@@ -16,6 +16,8 @@ namespace Models
         
         public DateTime birth_day { get; set; }
 
+        public string phone { get; set; }
+
         public string address { get; set; }
 
         public string password { get; set; }

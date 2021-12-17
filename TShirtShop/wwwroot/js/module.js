@@ -35,3 +35,7 @@ function authenticate(context) {
         })
     });
 }
+
+function clearLocalData(item) {
+    localStorage.removeItem(item);
+}

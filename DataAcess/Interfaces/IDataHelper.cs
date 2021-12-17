@@ -13,7 +13,7 @@ namespace DataAcess.Interfaces
         int Open();
         int Close();
         List<T> GetDatas<T>(string procName, SqlParameter[] parameters);
-        void Excute(string procName, SqlParameter[] parameters);
+        int Excute(string procName, SqlParameter[] parameters);
         void AddOuters(SqlParameter[] parameters);
         SqlParameter CreateParameter(string name, object value, DbType dbType, ParameterDirection direction = ParameterDirection.Input);
     }

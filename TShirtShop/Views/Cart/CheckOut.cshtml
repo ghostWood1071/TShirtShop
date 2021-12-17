@@ -1,0 +1,98 @@
+﻿<!-- Start Checkout -->
+@section style {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+}
+<section class="shop checkout section" ng-controller="checkout">
+   <div class="container">
+      <div class="row">
+         <div class="col-lg-8 col-12">
+            <div class="checkout-form">
+               <h2>Make Your Checkout Here</h2>
+               <p>Please register in order to checkout more quickly</p>
+               <!-- Form -->
+               <form class="form" method="post" action="#">
+                  <div class="row">
+                     <div class="col-lg-12 col-md-12 col-12" style="padding-top: 30px; padding-bottom: 30px; background-color: aqua; font-size: 14px;">
+                        <div class="d-flex flex-row">
+                           <div style="padding-top:2px; margin-right: 10px;"><input type="checkbox" ng-model ="addrState" ng-change="addrStateChange()" id="check-add"></div>
+                           <div>Use your address</div>
+                        </div>
+                     </div>
+                     <div class="col-lg-12 col-md-12 col-12" style="font-size: 14px; margin-top:60px; margin-bottom: 20px">
+                        Or use another
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-12">
+                        <div class="form-group">
+                           <label>Full Name<span>*</span></label>
+                           <input type="text" name="name" required="required"  ng-model="fullName">
+                        </div>
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-12">
+                        <div class="form-group">
+                           <label>Phone Number<span>*</span></label>
+                           <input type="tel" name="phone" required="required"  ng-model="phone">
+                        </div>
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-12">
+                        <div class="form-group">
+                           <label>Address<span>*</span></label>
+                           <input type="text" name="address" required="required"  ng-model="address">
+                        </div>
+                     </div>
+                  </div>
+               </form>
+               <!--/ End Form -->
+            </div>
+         </div>
+         <div class="col-lg-4 col-12">
+            <div class="order-details">
+               <!-- Order Widget -->
+               <div class="single-widget">
+                  <h2>CART  TOTALS</h2>
+                  <div class="content">
+                     <ul>
+                        <li>Sub Total<span>{{total()}} VND</span></li>
+                        <li>(+) Shipping<span>10.00 VND</span></li>
+                        <li class="last">Total<span>{{total()+10000}} VND</span></li>
+                     </ul>
+                  </div>
+               </div>
+               <!--/ End Order Widget -->
+               <!-- Order Widget -->
+               <div class="single-widget">
+                  <h2>Payments</h2>
+                  <div class="content" style="padding-left: 50px; margin-top: 20px;">
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" ng-click="shippingTypeClick('online')">
+                        <label class="form-check-label" for="flexRadioDefault1">
+                        Online
+                        </label>
+                     </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" ng-click="shippingTypeClick('COD')">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                        COD
+                        </label>
+                     </div>
+                  </div>
+               </div>
+               <!--/ End Order Widget -->
+               <!-- Button Widget -->
+               <div class="single-widget get-button">
+                  <div class="content">
+                     <div class="button">
+                        <a href="javascript:void(0)" class="btn" ng-click="checkout()">proceed to checkout</a>
+                     </div>
+                  </div>
+               </div>
+               <!--/ End Button Widget -->
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!--/ End Checkout -->
+@section script {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/checkout.module.js"></script>
+}

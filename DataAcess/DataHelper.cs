@@ -65,18 +65,20 @@ namespace DataAcess
             };
         }
 
-        public void Excute(string procName, SqlParameter[] parameters)
+        public int Excute(string procName, SqlParameter[] parameters)
         {
             try
             {
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = procName;
                 command.Parameters.AddRange(parameters);
-                command.ExecuteNonQuery();
+                int result = command.ExecuteNonQuery();
+                return result;
             } catch(Exception e)
             {
-
+                return -1;
             }
         }
 

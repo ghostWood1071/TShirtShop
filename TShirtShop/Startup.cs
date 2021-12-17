@@ -1,18 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Bussiness;
 using Bussiness.Interfaces;
 using DataAcess;
 using DataAcess.Interfaces;
-using Models;
+using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 namespace TShirtShop
 {
     public class Startup
@@ -27,8 +24,7 @@ namespace TShirtShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-
+            services.AddControllersWithViews().AddNewtonsoftJson();
             services.AddDistributedMemoryCache();           
             services.AddSession(cfg => {                    
                 cfg.Cookie.Name = "ecomerce";             
@@ -37,11 +33,14 @@ namespace TShirtShop
 
             services.AddTransient<IDataHelper>(x => new DataHelper(Configuration.GetConnectionString("MVC")));
             services.AddTransient<IProductAcessible, ProductDataAcess>();
-            services.AddTransient<IProductBuss, ProductBussiness>();
             services.AddTransient<ICategoryAcessible, CategoryDataAcess>();
-            services.AddTransient<ICategoryBuss, CategoryBussiness>();
             services.AddTransient<IAccountAcessible, UserDataAcess>();
+            services.AddTransient<IOrderAcessible, OrderDataAcess>();
+
+            services.AddTransient<IProductBuss, ProductBussiness>();
+            services.AddTransient<ICategoryBuss, CategoryBussiness>();
             services.AddTransient<IUserBussiness, UserBussiness>();
+            services.AddTransient<IOrderBuss, OrderBussiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

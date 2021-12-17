@@ -34,7 +34,8 @@ namespace TShirtShop.Controllers
                 return new UserInfoRessult {
                     account = result.user_account,
                     address = result.address,
-                    full_name = result.user_name
+                    full_name = result.user_name,
+                    phone = result.phone
                 };
             }
             return null;
