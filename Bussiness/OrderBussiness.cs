@@ -19,6 +19,7 @@ namespace Bussiness
         public bool AddOrder(OrderPost order)
         {
             order.order_id = Guid.NewGuid().ToString();
+            order.orderdate = DateTime.Now;
             for(int i = 0; i<order.list_details.Count; i++)
                order.list_details[i].order_detail_id = Guid.NewGuid().ToString();
             return orderAcess.AddOrder(order);

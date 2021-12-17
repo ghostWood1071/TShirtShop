@@ -100,7 +100,7 @@
         var checkLogin = await authenticate($http);
         if (checkLogin) {
             $scope.addCart();
-            //location.href = "/checkout";
+            location.href = "/cart/checkout";
         }
         else {
             toastr.error("You need login in order to buy product");

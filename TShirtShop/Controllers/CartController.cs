@@ -26,30 +26,34 @@ namespace TShirtShop.Controllers
         }
         public IActionResult CheckOut()
         {
+            string rawUserData = HttpContext.Session.GetString("user");
+            if (rawUserData == null)
+                return Redirect("/Login");
+            UserResult user = JsonSerializer.Deserialize<UserResult>(rawUserData);
+            if (user == null)
+                return View("/Login");
             return View();
         }
         
-        [HttpPost]
-        public async Task<bool> CreateOrder()
-        {
-            //string rawOrder = await new StreamReader(Request.Body).ReadToEndAsync();
-            //OrderPost order = await JsonSerializer.DeserializeAsync<OrderPost>(Request.Body);
-            OrderPost order = await Request.ReadFromJsonAsync<OrderPost>();
-            string rawUserData = HttpContext.Session.GetString("user");
-            UserResult user = JsonSerializer.Deserialize<UserResult>(rawUserData);
-            order.customer_id = user.user_id.ToString();
-            order.orderdate = DateTime.Now;
-            bool res = orderBuss.AddOrder(order);
-            return res;
-        }
+        //[HttpPost]
+        //public async Task<bool> CreateOrder()
+        //{
+        //    //string rawOrder = await new StreamReader(Request.Body).ReadToEndAsync();
+        //    //OrderPost order = await JsonSerializer.DeserializeAsync<OrderPost>(Request.Body);
+        //    OrderPost order = await Request.ReadFromJsonAsync<OrderPost>();
+        //    string rawUserData = HttpContext.Session.GetString("user");
+        //    UserResult user = JsonSerializer.Deserialize<UserResult>(rawUserData);
+        //    order.customer_id = user.user_id.ToString();
+        //    bool res = orderBuss.AddOrder(order);
+        //    return res;
+        //}
 
         [HttpPost]
-        public bool CreateOrderS(OrderPost order)
+        public bool CreateOrder([FromBody]OrderPost order)
         {
             string rawUserData = HttpContext.Session.GetString("user");
             UserResult user = JsonSerializer.Deserialize<UserResult>(rawUserData);
             order.customer_id = user.user_id.ToString();
-            order.orderdate = DateTime.Now;
             bool res = orderBuss.AddOrder(order);
             return res;
         }

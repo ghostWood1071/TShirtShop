@@ -1,11 +1,13 @@
-﻿myApp.controller("account", ($scope, $http, $rootScope) => {
+﻿myApp.controller("account", async ($scope, $http, $rootScope) => {
+    $scope.auth = await authenticate($http);
     $scope.userInfo = getLocalData("account");
-    if ($scope.userInfo == null || $scope.userInfo == "" || $scope.userInfo == [])
+    if (!$scope.auth)
         $scope.infoState = "display: none";
     else
         $scope.infoState = "display: block";
+
     $scope.onClickLogin = () => {
-        if ($scope.userInfo == null || $scope.userInfo == "" || $scope.userInfo == [])
+        if (!$scope.auth)
             location.href = "/login";
         else
             return;
