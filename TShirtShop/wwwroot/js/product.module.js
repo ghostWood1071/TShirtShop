@@ -1,6 +1,4 @@
-﻿
-
-myApp.controller('product', ($scope, $http) => {
+﻿myApp.controller('product', ($scope, $http) => {
 
     //get categories
     $http.get(`/product/GetCategories`).then((response) => {
@@ -89,9 +87,9 @@ myApp.controller('product', ($scope, $http) => {
             keyword: getParameter("keyword")
         }
     }).then((response) => {
-        $scope.products = response.data.products;
+        $scope.products = response.data;
         $scope.maxSize = 5;
-        $scope.bigTotalItems = response.data.products.length;
+        $scope.bigTotalItems = response.data.length;
         $scope.bigCurrentPage = 1;
         $scope.pageChange();
     }, (err) => {

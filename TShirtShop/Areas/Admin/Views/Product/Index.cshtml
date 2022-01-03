@@ -1,5 +1,273 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div ng-controller ="product" >
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Product Manage</h1>
+          </div>
+          <div class="col-sm-6 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-xl">Create</button>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Product List</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 100px">Image</th>
+                      <th>Category</th>
+                      <th>Product Name</th>
+                      <th>Release date</th>
+                      <th >Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <img style="width:100%" src="https://product.hstatic.net/1000042622/product/tb2c17el3nh8kjjsspcxxb3qfxa___132691477_f4394d8768af45f6b0db15fcb283521d_master.jpg" alt="">
+                      </td>
+                      <td>Update software</td>
+                      <td>alo</td>
+                      <td></td>
+                      <td class="d-flex flex-row justify-content-around">
+                        <div><i class="far fa-eye"></i></div>
+                        <div><i class="fas fa-pencil-alt"></i></div>
+                        <div><i class="fas fa-trash"></i></div>
+                      </td>
+                      
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+    <!--modal-->
+    <div class="modal fade" id="modal-xl" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add new product</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body row">
+            <!--product info-->
+            <div class="col-12 row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label>Category</label>
+                  <select class="form-control" ng-model ="category_id" ng-change="change(category_id)">
+                    <option ng-repeat="c in categories" value={{c.category_id}}>{{c.category_name}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Product Name</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Product Name" ng-model="product_name">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Price(VND)</label>
+                  <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Product Name" ng-model="price">
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="exampleInputFile">Image</label>
+                  <div class="input-group">
+                    <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="exampleInputFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Releas date:</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <input  type="text" class="form-control datemask" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" ng-model="release_date">
+                  </div>
+                  <!-- /.input group -->
+                </div>
+              </div>
+            </div>
+            <!--end product info-->
+
+            <!--color table-->
+            <div class="card-body col-8">
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-6">
+                  <h5>Colors</h5>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-color">Add color</button>
+                </div>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">Color</th>
+                    <th>Color Name</th>
+                    <th>discount</th>
+                    <th >Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat ="c in colors">
+                    <td>
+                      <div style="background-color: {{c.color_value}}; width: 20px; height: 20px;"></div>
+                    </td>
+                    <td>{{c.color_name}}</td>
+                    <td>{{c.discount}}</td>
+                    <td class="d-flex flex-row justify-content-around">
+                      <div ng-click="delColor($index)"><i class="fas fa-trash"></i></div>
+                      <div ng-click="selectColor($index)"><i class="fas fa-eye"></i></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--end color table-->
+
+            <!--size table-->
+            <div class="card-body col-4">
+              <div class="row" style="margin-bottom:10px">
+                <div class="col-6">
+                  <h5>Sizes</h5>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-size">Add size</button>
+                </div>
+              </div>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">Size</th>
+                    <th style="width: 20px">Quantity</th>
+                    <th style="width: 10px">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat ="s in sizes"  >
+                    <td>{{s.size_value}}</td>
+                    <td>{{s.quantity}}</td>
+                    <td class="d-flex flex-row justify-content-around">
+                      <div ng-click="delSize($index)"><i class="fas fa-trash"></i></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--end size table-->
+
+            <!--modal to add color-->
+            <div class="modal fade" id="modal-color" style="display: none;" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Color information</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Color Name</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Color Name" ng-model="colorName" ng-change="change(colorName)">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Hex</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Hex" ng-model = "colorHex" ng-change="change(colorHex)">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Discount</label>
+                      <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Discount" value="0" ng-model="discount" ng-change="change(discount)">
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-primary" ng-click = "addColor()">Save changes</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!--end modal color-->
+
+            <!--modal to add size-->
+            <div class="modal fade" id="modal-size" style="display: none;" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Size information</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label>Size</label>
+                      <select class="form-control" ng-model="sizeValue" ng-change="change(sizeValue)">
+                        <option ng-repeat="s in sizeValues" value="{{s}}">{{s}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Quantity</label>
+                      <input type="number" class="form-control" id="exampleInputEmail1" placeholder="Quantity" ng-model ="quantity" >
+                    </div>
+                    
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-primary" ng-click = "addSize()">Save changes</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!--end modal to add size-->
+
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" ng-click="addProduct()" >Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!--end modal-->
+</div>
+@section script {
+    <script src="~/lib/admin/plugins/inputmask/jquery.inputmask.min.js"></script>
+    <script>
+        $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    </script>
+    <script src="~/js/admin/product.controller.js"></script>
 }

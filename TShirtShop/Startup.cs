@@ -8,8 +8,9 @@ using Bussiness;
 using Bussiness.Interfaces;
 using DataAcess;
 using DataAcess.Interfaces;
-using Newtonsoft.Json.Serialization;
-using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
+
 namespace TShirtShop
 {
     public class Startup
@@ -24,12 +25,27 @@ namespace TShirtShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews().AddNewtonsoftJson();
-            services.AddDistributedMemoryCache();           
-            services.AddSession(cfg => {                    
-                cfg.Cookie.Name = "ecomerce";             
-                cfg.IdleTimeout = new TimeSpan(365, 0, 0, 0); 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(opts =>
+            {
+                opts.LoginPath = "/admin/login";
+            });
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(cfg => {
+                cfg.Cookie.Name = "ecomerce";
+                cfg.Cookie.IsEssential = true;
+                cfg.IdleTimeout = new TimeSpan(365, 0, 0, 0);
+            });
+
+            services.AddControllersWithViews().AddNewtonsoftJson();
+            
 
             services.AddTransient<IDataHelper>(x => new DataHelper(Configuration.GetConnectionString("MVC")));
             services.AddTransient<IProductAcessible, ProductDataAcess>();
@@ -57,18 +73,23 @@ namespace TShirtShop
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseSession();
+
+            app.UseCookiePolicy();
+            app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseSession();
+
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "MyArea",
+                    name:  "MyArea",
                     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                 );
                 endpoints.MapControllerRoute(

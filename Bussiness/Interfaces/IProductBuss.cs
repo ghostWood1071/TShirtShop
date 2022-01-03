@@ -11,7 +11,7 @@ namespace Bussiness.Interfaces
         List<SaleResult> GetSales(int quantity);
         List<TrendingResult> GetTrendings(int quantity, string category_id);
         List<LatestResult> GetLatests(int quantity);
-        AllProductResult GetAllProducts(string keyword);
+        List<Product> GetAllProducts(string keyword);
         ProductDetailResult GetProductDetail(string product_id);
 
         List<ProductImage> GetProductImages(string product_id);

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\fonts\" />
+    <Folder Include="wwwroot\img\SP00000001\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -39,3 +39,13 @@ function authenticate(context) {
 function clearLocalData(item) {
     localStorage.removeItem(item);
 }
+
+function JSONparse(string) {
+   return angular.fromJson(string);
+}
+
+function toImageList(list) {
+    for (var i = 0; i < list.length; i++) {
+        
+    }
+}

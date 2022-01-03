@@ -44,7 +44,7 @@ namespace TShirtShop.Controllers
             return productBuss.GetLatests(quantity);
         }
 
-        public AllProductResult GetAllProduct(string keyword)
+        public List<Product> GetAllProduct(string keyword)
         {
             return productBuss.GetAllProducts(keyword);
         }

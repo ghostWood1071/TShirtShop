@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Bussiness.Interfaces;
 using DataAcess.Interfaces;
 using Models;
+using System.Text.Json;
 
 namespace Bussiness
 {
@@ -16,9 +17,25 @@ namespace Bussiness
         {
             producAccess = productAcessible;
         }
-        public AllProductResult GetAllProducts(string keyword)
+        public List<Product> GetAllProducts(string keyword)
         {
-            return producAccess.GetAllProducts(keyword);
+            List<ProductGet> productGets =  producAccess.GetAllProducts(keyword);
+            var query = from product in productGets
+                        select new Product()
+                        {
+                            category_id = product.category_id,
+                            category_name = product.category_name,
+                            images = JsonSerializer.Deserialize<List<ProductImage>>(product.images==null?"[]":product.images),
+                            isnew = product.isnew,
+                            price_value = product.price_value,
+                            product_id = product.product_id,
+                            product_name = product.product_name,
+                            quantity = product.quantity,
+                            sold_quan = product.sold_quan
+                        };
+
+            List<Product> result = query.ToList();
+            return result;
         }
 
         public List<LatestResult> GetLatests(int quantity)

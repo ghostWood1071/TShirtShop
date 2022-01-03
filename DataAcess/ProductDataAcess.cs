@@ -17,7 +17,7 @@ namespace DataAcess
             this.helper = helper;
             
         }
-        public AllProductResult GetAllProducts(string keyword)
+        public List<ProductGet> GetAllProducts(string keyword)
         {
             helper.Open();
             SqlParameter[] sqlParameters = new SqlParameter[]
@@ -28,10 +28,9 @@ namespace DataAcess
                 helper.CreateParameter("@out_err_line", -1, DbType.Int32, ParameterDirection.Output)
             };
             //helper.AddOuters(sqlParameters);
-            AllProductResult result = new AllProductResult();
-            result.products = helper.GetDatas<AllProduct>("get_products", sqlParameters);
+            List<ProductGet> products = helper.GetDatas<ProductGet>("get_products", sqlParameters);
             helper.Close();
-            return result;
+            return products;
         }
         public List<LatestResult> GetLatests(int quantity)
         {

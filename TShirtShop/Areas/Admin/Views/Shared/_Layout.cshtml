@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="~/lib/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   @RenderSection("style", required: false);
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed" ng-app="admin">
 <div class="wrapper">
 
   <!-- Navbar -->
@@ -52,9 +52,9 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>Calendar</p>
+            <a href="admin/product" class="nav-link">
+              <i class="nav-icon fas fa-tshirt"></i>
+              <p>Product Manage</p>
             </a>
           </li>
           <li class="nav-item">
@@ -101,6 +101,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="~/lib/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script src="~/lib/angular.min.js"></script>
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -114,6 +115,7 @@
 <script src="~/lib/admin/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="~/lib/admin/dist/js/pages/dashboard.js"></script>
+<script src="~/js/admin/module.js"></script>
 @RenderSection("script", required: false);
 </body>
 </html>
